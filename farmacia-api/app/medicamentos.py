@@ -120,9 +120,9 @@ def consultar_disponibilidad(
     total = 0
     cant_agotados = 0
     cant_disponibles = 0
-    valor = 0
+    valor_disponibles = 0
     disponible_mas_economico: str | None = None
-    menor_tarifa = float("inf")
+    menor_medicamento = float("inf")
 
     for med in MEDICAMENTOS:
         total += 1
@@ -130,9 +130,9 @@ def consultar_disponibilidad(
             cant_agotados += 1
         else:
             cant_disponibles += 1
-            valor += med["tarifa_noche"]
-            if med["tarifa_noche"] < menor_tarifa:
-                menor_tarifa = med["tarifa_noche"]
+            valor_disponibles += med["medicamentos"]
+            if med["medicamentos"] < menor_medicamento:
+                menor_medicamento = med["medicamentos"]
                 disponible_mas_economico = med["codigo"]
 
     porcentaje_agotado = round((cant_agotados / total) * 100, 1)
@@ -142,6 +142,6 @@ def consultar_disponibilidad(
         "agotados": cant_agotados,
         "disponibles": cant_disponibles,
         "porcentaje_agotado": porcentaje_agotado,
-        "valor_disponibles": valor,
+        "valor_disponibles": valor_disponibles,
         "disponible_mas_economico": disponible_mas_economico,
     }
