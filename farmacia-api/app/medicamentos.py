@@ -53,8 +53,8 @@ def calcular_pedido(
         )
 
     cantidad = len(seleccion)
-    suma_medicamentos = sum(h["medicamentos"] for h in seleccion)
-    con_receta_count = sum(1 for h in seleccion if h["con_receta"])
+    suma_medicamentos = sum(h["precio"] for h in seleccion)
+    con_receta_count = sum(1 for h in seleccion if h["requiere_receta"])
 
     precio_promedio = round(suma_medicamentos / cantidad, 2)
     valor_base = suma_medicamentos * unidades
@@ -105,9 +105,9 @@ def consultar_disponibilidad(
             cant_agotados += 1
         else:
             cant_disponibles += 1
-            valor_disponibles += med["medicamentos"]
-            if med["medicamentos"] < menor_medicamento:
-                menor_medicamento = med["medicamentos"]
+            valor_disponibles += med["precio"]
+            if med["precio"] < menor_medicamento:
+                menor_medicamento = med["precio"]
                 disponible_mas_economico = med["codigo"]
 
     porcentaje_agotado = round((cant_agotados / total) * 100, 1)
