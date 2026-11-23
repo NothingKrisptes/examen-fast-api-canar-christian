@@ -3,8 +3,8 @@ from pydantic import BaseModel, Field
 
 class MedicamentoBase(BaseModel):
     nombre: str = Field(min_length=3, max_length=60)
-    precio: int = Field(ge=1, le=10)
-    categoria: int = Field(ge=1, le=10)
+    precio: int = Field(ge=1, le=100)
+    categoria: int = Field(ge=1, le=100)
     requiere_receta: bool = True
 
 class MedicamentoCrear(MedicamentoBase):
@@ -12,8 +12,8 @@ class MedicamentoCrear(MedicamentoBase):
 
 class MedicamentoActualizar(BaseModel):
     nombre: str | None = Field(default=None, min_length=3, max_length=60)
-    precio: int | None = Field(default=None, ge=1, le=10)
-    categoria: int | None = Field(default=None, ge=1, le=10)
+    precio: int | None = Field(default=None, ge=1, le=100)
+    categoria: int | None = Field(default=None, ge=1, le=100)
     requiere_receta: bool | None = None
 
 class Medicamento(MedicamentoCrear):
